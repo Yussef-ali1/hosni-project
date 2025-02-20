@@ -3,7 +3,7 @@
 import { BookOpen, Clock, DollarSign } from "lucide-react";
 import EnrollmentDialog from "./EnrollmentDialog";
 
-const primaryColor = "text-green-700"; // A color associated with sustainability, recycling, and learning
+const primaryColor = "text-green-700"; 
 
 const courses = [
   {
