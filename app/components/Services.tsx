@@ -1,45 +1,83 @@
-import { Wrench, Truck, Recycle, GraduationCap } from "lucide-react"
+import { Lightbulb, Recycle, Truck, GraduationCap } from "lucide-react"
 import Link from "next/link"
 
-const services = [
+const offerings = [
   {
     id: 1,
-    name: "Green Fixing & Maintenance",
-    icon: Wrench,
-    description: "Expert maintenance for your sustainable products",
+    name: "Smart Energy Solutions",
+    icon: Lightbulb,
+    description: "LED lighting, solar panels, energy-efficient appliances",
+    bgColor: "bg-blue-50",
+    borderColor: "border-blue-200"
   },
-  { id: 2, name: "Sustainable Delivery", icon: Truck, description: "Eco-friendly delivery for all your purchases" },
-  { id: 3, name: "Recycling & Compost", icon: Recycle, description: "Efficient recycling and composting solutions" },
+  { 
+    id: 2, 
+    name: "Recycling & Composting", 
+    icon: Recycle, 
+    description: "Home & business waste management solutions",
+    bgColor: "bg-green-50",
+    borderColor: "border-green-200"
+  },
+  { 
+    id: 3, 
+    name: "Green Delivery & Fixing Services", 
+    icon: Truck, 
+    description: "Certified eco-friendly repairs & logistics",
+    bgColor: "bg-amber-50",
+    borderColor: "border-amber-200"
+  },
   {
     id: 4,
-    name: "Certified Training",
+    name: "Training & Awareness",
     icon: GraduationCap,
-    description: "Learn about sustainability and energy-saving",
+    description: "Sustainability courses and certification programs",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-200"
   },
 ]
 
-export default function Services() {
+export default function ExploreOfferings() {
   return (
-    <section className="py-16 bg-green-50">
+    <div className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service) => (
-            <div key={service.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow">
-              <service.icon className="h-12 w-12 text-green-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{service.name}</h3>
-              <p className="text-gray-600 mb-4">{service.description}</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-800">
+          Explore Our Offerings
+        </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          Discover sustainable solutions for every aspect of modern living
+        </p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {offerings.map((offering) => (
+            <div 
+              key={offering.id} 
+              className={`rounded-lg shadow-md p-6 hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer border ${offering.borderColor} ${offering.bgColor}`}
+            >
+              <offering.icon className="h-10 w-10 text-green-600 mb-4" />
+              <h3 className="text-xl font-semibold mb-3">{offering.name}</h3>
+              <p className="text-gray-600 mb-6 min-h-14">{offering.description}</p>
               <Link
-                href={`/services/${service.id}`}
-                className="text-green-600 font-semibold hover:text-green-700 transition-colors"
+                href={`/offerings/${offering.id}`}
+                className="inline-flex items-center text-green-600 font-medium hover:text-green-700 transition-colors"
               >
-                Learn More →
+                Explore Options
+                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                </svg>
               </Link>
             </div>
           ))}
         </div>
+        
+        <div className="text-center mt-12">
+          <Link 
+            href="/all-offerings" 
+            className="inline-block bg-green-600 text-white py-3 px-8 rounded-md font-semibold hover:bg-green-700 transition-colors"
+          >
+            Discover More
+          </Link>
+        </div>
       </div>
-    </section>
+    </div>
   )
 }
-
