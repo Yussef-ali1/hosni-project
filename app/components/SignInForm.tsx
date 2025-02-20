@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -20,6 +21,7 @@ const formSchema = z.object({
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const [error, setError] = useState("")
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,54 +68,90 @@ export default function SignInForm() {
     } finally {
       setIsLoading(false)
     }
+    setError("")
+    
   }
   
 
   return (
     <>
-
-    <Toaster position="top-center" />
-
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-md mx-auto">
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="you@example.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+    <Toaster />
+    <div className="bg-white p-8 rounded-lg shadow-md">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
+          <h2 className="text-3xl font-bold text-green-600 text-center mb-6">Welcome Back</h2>
+          
+          {error && (
+            <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">
+              {error}
+            </div>
           )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="********" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Signing in..." : "Sign In"}
-        </Button>
-        <div className="text-center">
-          <Link href="/signup" className="text-sm text-blue-600 hover:underline">
-            Don't have an account? Sign up
-          </Link>
-        </div>
-      </form>
-    </Form>
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Email</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="you@example.com" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Password</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="password" 
+                    placeholder="********" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <div className="flex justify-end">
+            <Link 
+              href="/forgot-password" 
+              className="text-sm text-green-600 hover:text-green-700 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
+
+          <Button 
+            type="submit" 
+            className="w-full bg-green-600 hover:bg-green-700 text-white transition-colors" 
+            disabled={isLoading}
+          >
+            {isLoading ? "Signing in..." : "Sign In"}
+          </Button>
+
+          <div className="text-center">
+            <Link 
+              href="/signup" 
+              className="text-sm text-green-600 hover:text-green-700 hover:underline"
+            >
+              Don't have an account? Sign up
+            </Link>
+          </div>
+        </form>
+      </Form>
+    </div>
     </>
-
   )
 }
-

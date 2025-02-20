@@ -1,4 +1,5 @@
 "use client"
+
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -16,7 +17,8 @@ const formSchema = z
   .object({
     username: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
+    password: z.string()
+      .min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -76,72 +78,104 @@ export default function SignUpForm() {
 
     <Toaster position="top-center" />
 
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-md mx-auto">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder="John Doe" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="you@example.com" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="********" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="********" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type="submit" className="w-full" disabled={isLoading}>
-          {isLoading ? "Signing up..." : "Sign Up"}
-        </Button>
-        <div className="text-center">
-          <Link href="/signin" className="text-sm text-blue-600 hover:underline">
-            Already have an account? Sign in
-          </Link>
-        </div>
-      </form>
-    </Form>
-    </>
+    <div className="bg-white p-8 rounded-lg shadow-md">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
+          <h2 className="text-3xl font-bold text-green-600 text-center mb-6">Join Our Sustainable Community</h2>
+          
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Name</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="John Doe" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
 
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Email</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="you@example.com" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Password</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="password" 
+                    placeholder="********" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Confirm Password</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="password" 
+                    placeholder="********" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
+
+          <Button 
+            type="submit" 
+            className="w-full bg-green-600 hover:bg-green-700 text-white transition-colors" 
+            disabled={isLoading}
+          >
+            {isLoading ? "Creating your account..." : "Sign Up"}
+          </Button>
+
+          <div className="text-center">
+            <Link 
+              href="/signin" 
+              className="text-sm text-green-600 hover:text-green-700 hover:underline"
+            >
+              Already have an account? Sign in
+            </Link>
+          </div>
+        </form>
+      </Form>
+    </div>
+    </>
   )
 }
-
