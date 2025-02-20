@@ -7,6 +7,10 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import Link from "next/link"
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
+import { Toaster } from 'react-hot-toast'
+
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -15,6 +19,7 @@ const formSchema = z.object({
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -26,13 +31,49 @@ export default function SignInForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // Here you would typically send a request to your authentication API
-    console.log(values)
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Simulating API call
-    setIsLoading(false)
+    try {
+      const response = await fetch('http://localhost:5000/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password
+        })
+      })
+  
+      const data = await response.json()
+
+
+      
+      if (response.ok) {
+              // Store tokens in localStorage
+      localStorage.setItem('accessToken', data.token)
+      localStorage.setItem('refreshToken', data.refreshToken) // If your API provides refresh token
+      localStorage.setItem('user', JSON.stringify(data.user))
+
+         toast.success('login successful! Redirecting to home...')
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
+      } else {
+        toast.error(data.error || 'Login failed')
+       }
+    } catch (error) {
+      console.error('Error during Login:', error)
+      toast.error('Network error. Please try again.')
+    } finally {
+      setIsLoading(false)
+    }
   }
+  
 
   return (
+    <>
+
+    <Toaster position="top-center" />
+
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-md mx-auto">
         <FormField
@@ -71,6 +112,8 @@ export default function SignInForm() {
         </div>
       </form>
     </Form>
+    </>
+
   )
 }
 
