@@ -27,7 +27,7 @@ const SustainabilityService = () => {
       title: 'Bring Your Own Bag',
       points: 25,
       icon: <span className="text-3xl text-green-500"><FaLeaf /></span>,
-      description: 'Extra points for using reusable shopping bags'
+      description: 'Extra points for using reusable  bags'
     }
   ];
 
