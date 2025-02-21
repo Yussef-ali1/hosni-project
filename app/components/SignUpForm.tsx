@@ -88,7 +88,7 @@ export default function SignUpForm() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-green-700">Name</FormLabel>
+                <FormLabel className="text-green-700">Username</FormLabel>
                 <FormControl>
                   <Input 
                     placeholder="John Doe" 

@@ -54,6 +54,7 @@ export default function SignInForm() {
       localStorage.setItem('accessToken', data.token)
       localStorage.setItem('refreshToken', data.refreshToken) // If your API provides refresh token
       localStorage.setItem('user', JSON.stringify(data.user))
+      document.cookie = `auth-token=${data.token}; path=/; secure; samesite=strict`
 
          toast.success('login successful! Redirecting to home...')
         setTimeout(() => {
@@ -146,7 +147,7 @@ export default function SignInForm() {
               href="/signup" 
               className="text-sm text-green-600 hover:text-green-700 hover:underline"
             >
-              Don't have an account? Sign up
+              Don&apos;t have an account? Sign up
             </Link>
           </div>
         </form>
