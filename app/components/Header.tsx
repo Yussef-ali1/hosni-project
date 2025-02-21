@@ -10,9 +10,9 @@ const navItems = [
     name: "Products", 
     href: "/products",
     dropdown: [
-      { name: "Energy Efficient", href: "/products/energy-efficient" },
-      { name: "Eco-Friendly Home", href: "/products/eco-home" },
-      { name: "Sustainable Living", href: "/products/sustainable-living" }
+      { name: "Energy Efficient", href: "/products" },
+      { name: "Eco-Friendly Home", href: "/products" },
+      { name: "Sustainable Living", href: "/products" }
     ]
   },
   { name: "Services", href: "/services" },
@@ -25,11 +25,16 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [scrolled, setScrolled] = useState(false)
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter()
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
+
+    const token = localStorage.getItem('accessToken')
+    setIsLoggedIn(!!token)
     
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -37,6 +42,14 @@ export default function Header() {
   
   const toggleDropdown = (i:any) => {
     setActiveDropdown(activeDropdown === i ? null : i)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
+    setIsLoggedIn(false)
+    router.push('/')
   }
 
   return (
@@ -105,6 +118,15 @@ export default function Header() {
         
         {/* Desktop Sign In Button */}
         <div className="hidden md:flex items-center space-x-4">
+      {isLoggedIn ? (
+        <button
+          onClick={handleLogout}
+          className="bg-white text-green-600 px-5 py-2 rounded-md font-semibold hover:bg-red-50 transition-colors shadow-sm hover:shadow"
+        >
+          Sign Out
+        </button>
+      ) : (
+        <>
           <Link
             href="/signin"
             className="bg-white text-green-600 px-5 py-2 rounded-md font-semibold hover:bg-green-50 transition-colors shadow-sm hover:shadow"
@@ -117,8 +139,10 @@ export default function Header() {
           >
             Join Us
           </Link>
-        </div>
-        
+        </>
+      )}
+    </div>
+
         {/* Mobile Menu Button */}
         <button 
           className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-green-700 hover:bg-green-800 transition-colors"

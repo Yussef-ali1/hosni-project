@@ -51,7 +51,7 @@ export default function Hero() {
             Calculate Your Carbon Footprint
           </Link>
           <Link
-            href="/community"
+            href="/green-community"
             className="bg-green-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-800 transition-colors"
           >
             Join Our Green Community
