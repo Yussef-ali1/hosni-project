@@ -102,10 +102,10 @@ export default function Footer() {
             <h4 className="font-semibold mb-3">Follow Us</h4>
             <div className="flex space-x-4">
               {[
-                { icon: <Facebook className="w-5 h-5" />, name: "Facebook", href: "#" },
+                { icon: <Facebook className="w-5 h-5" />, name: "Facebook", href: "https://www.facebook.com/profile.php?id=61572956647191" },
                 { icon: <Twitter className="w-5 h-5" />, name: "Twitter", href: "#" },
                 { icon: <Instagram className="w-5 h-5" />, name: "Instagram", href: "#" },
-                { icon: <Linkedin className="w-5 h-5" />, name: "LinkedIn", href: "#" }
+                { icon: <Linkedin className="w-5 h-5" />, name: "LinkedIn", href: "https://www.linkedin.com/posts/sustainability-gate_sustainability-gate-linkedin-activity-7295383585652457472-AUot?utm_source=share&utm_medium=member_desktop" }
               ].map((social) => (
                 <a 
                   key={social.name}

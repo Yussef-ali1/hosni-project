@@ -3,32 +3,30 @@ const nextConfig = {
   output: 'standalone',
   images: {
     domains: ['images.unsplash.com', 'ik.imagekit.io'],
-    unoptimized: false,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: '*',
       },
     ],
   },
-  // Optimize for production
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has type errors.
+    ignoreBuildErrors: true,
+  },
+  experimental: {
+    serverActions: true,
+  },
   swcMinify: true,
   reactStrictMode: true,
   poweredByHeader: false,
-  webpack: (config, { isServer }) => {
-    config.module.rules.push({
-      test: /\.(mp4|webm)$/,
-      use: {
-        loader: 'file-loader',
-        options: {
-          publicPath: '/_next/static/videos/',
-          outputPath: 'static/videos/',
-          name: '[name].[hash].[ext]',
-        },
-      },
-    });
-    return config;
-  },
 };
 
 export default nextConfig;

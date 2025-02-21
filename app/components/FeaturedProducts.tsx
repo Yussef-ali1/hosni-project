@@ -24,7 +24,7 @@ export default function WhyChooseSustainabilityGate() {
       icon: <Gift className="h-12 w-12 text-green-600 mb-4" />,
       title: "Loyalty Rewards & Discounts",
       description: "Earn points for making sustainable choices and save on future purchases.",
-      linkUrl: "/rewards",
+      linkUrl: "/services/{service.id}",
       linkText: "Join Program"
     },
     {
@@ -32,7 +32,7 @@ export default function WhyChooseSustainabilityGate() {
       icon: <Users className="h-12 w-12 text-green-600 mb-4" />,
       title: "Certified Training & Community",
       description: "Learn, contribute, and grow with our workshops and community initiatives.",
-      linkUrl: "/community",
+      linkUrl: "/green-community",
       linkText: "Get Involved"
     }
   ]
