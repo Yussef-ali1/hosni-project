@@ -8,6 +8,10 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import Link from "next/link"
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
+import { Toaster } from 'react-hot-toast'
+
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -16,6 +20,7 @@ const formSchema = z.object({
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
   const [error, setError] = useState("")
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -28,32 +33,50 @@ export default function SignInForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    setError("")
-    
     try {
-      const response = await fetch('/api/auth/signin', {
+      const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password
+        })
       })
+  
+      const data = await response.json()
+
+
       
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Sign in failed')
-      }
-      
-      window.location.href = '/dashboard'
+      if (response.ok) {
+              // Store tokens in localStorage
+      localStorage.setItem('accessToken', data.token)
+      localStorage.setItem('refreshToken', data.refreshToken) // If your API provides refresh token
+      localStorage.setItem('user', JSON.stringify(data.user))
+      document.cookie = `auth-token=${data.token}; path=/; secure; samesite=strict`
+
+         toast.success('login successful! Redirecting to home...')
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
+      } else {
+        toast.error(data.error || 'Login failed')
+       }
     } catch (error) {
-      console.error('Signin error:', error)
-      setError(error instanceof Error ? error.message : 'Failed to sign in')
+      console.error('Error during Login:', error)
+      toast.error('Network error. Please try again.')
     } finally {
       setIsLoading(false)
     }
+    setError("")
+    
   }
+  
 
   return (
+    <>
+    <Toaster />
     <div className="bg-white p-8 rounded-lg shadow-md">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
@@ -124,11 +147,12 @@ export default function SignInForm() {
               href="/signup" 
               className="text-sm text-green-600 hover:text-green-700 hover:underline"
             >
-              Don't have an account? Sign up
+              Don&apos;t have an account? Sign up
             </Link>
           </div>
         </form>
       </Form>
     </div>
+    </>
   )
 }
