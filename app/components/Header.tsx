@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Leaf, Menu, X, ChevronDown } from "lucide-react"
+import Image from "next/image" // Add this import
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -45,7 +46,16 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center group">
           <div className="relative">
-            <Leaf className="h-8 w-8 mr-2 text-white transition-transform duration-300 group-hover:scale-110" />
+            <Image
+              src="/SustainabilityGate.png"
+              alt="Sustainability Gate"
+
+              width={40}
+              height={50}
+              className="h-8 w-8 mr-2 transition-transform duration-300 group-hover:scale-110"
+              priority
+            />
+            {/* <Leaf className="h-8 w-8 mr-2 text-white transition-transform duration-300 group-hover:scale-110" /> */}
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
           </div>
           <span className="text-2xl font-bold text-white">

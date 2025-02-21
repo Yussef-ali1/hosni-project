@@ -1,18 +1,35 @@
+'use client';
 import Link from "next/link"
+import { useEffect, useRef } from "react"
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Attempt to play video when component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+  }, []);
+
   return (
     <div className="relative bg-green-600 text-white py-20">
       {/* Video Background */}
       <div className="absolute inset-0 overflow-hidden z-0">
         <video 
-          className="object-cover w-full h-full opacity-40"
+          ref={videoRef}
+          className="object-cover w-full h-full opacity-80"
           autoPlay 
           muted 
           loop
+          playsInline
           poster="/images/sustainability-poster.jpg"
         >
-          <source src="YOUR_VIDEO_URL_HERE" type="video/mp4" />
+          <source src="/videos/sustainability-bg.mp4" type="video/mp4" />
+          {/* Fallback formats */}
+          <source src="/videos/sustainability-bg.webm" type="video/webm" />
           Your browser does not support the video tag.
         </video>
       </div>
