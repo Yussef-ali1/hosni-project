@@ -17,8 +17,14 @@ const services = [
     description: "Learn about sustainability and energy-saving",
   },
 ]
+interface ServiceGridProps {
+  searchQuery: string;
+  activeFilter: string;
+}
 
-export default function ServiceGrid() {
+
+export default function ServiceGrid({ searchQuery, activeFilter }: ServiceGridProps) {
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       {services.map((service) => (
