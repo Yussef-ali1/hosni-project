@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Leaf, Menu, X, ChevronDown } from "lucide-react"
 import Image from "next/image" // Add this import
+import { useRouter } from "next/router"
 
 const navItems = [
   { name: "Home", href: "/" },
