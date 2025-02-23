@@ -37,18 +37,21 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-green-300">
-                <Facebook />
-              </a>
-              <a href="#" className="hover:text-green-300">
-                <Twitter />
-              </a>
-              <a href="#" className="hover:text-green-300">
-                <Instagram />
-              </a>
-              <a href="#" className="hover:text-green-300">
-                <Linkedin />
-              </a>
+              {[
+                { icon: <Facebook className="w-5 h-5" />, name: "Facebook", href: "https://www.facebook.com/profile.php?id=61572956647191" },
+                { icon: <Twitter className="w-5 h-5" />, name: "Twitter", href: "#" },
+                { icon: <Instagram className="w-5 h-5" />, name: "Instagram", href: "#" },
+                { icon: <Linkedin className="w-5 h-5" />, name: "LinkedIn", href: "https://www.linkedin.com/posts/sustainability-gate_sustainability-gate-linkedin-activity-7295383585652457472-AUot?utm_source=share&utm_medium=member_desktop" }
+              ].map((social) => (
+                <a 
+                  key={social.name}
+                  href={social.href} 
+                  className="bg-green-800 hover:bg-green-600 rounded-full p-2 transition-colors" 
+                  aria-label={`Follow us on ${social.name}`}
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>

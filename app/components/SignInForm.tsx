@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import Link from "next/link"
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
+import { Toaster } from 'react-hot-toast'
+
 
 // Zod validation schema similar to Joi
 const formSchema = z.object({
@@ -19,6 +23,7 @@ const formSchema = z.object({
 
 export default function SignInForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
   const [error, setError] = useState("")
 
   const {
@@ -35,91 +40,126 @@ export default function SignInForm() {
 
   async function onSubmit(values: any) {
     setIsLoading(true)
-    setError("")
-
     try {
-      const response = await fetch("/api/auth/signin", {
-        method: "POST",
+      const response = await fetch('http://localhost:5000/auth/login', {
+        method: 'POST',
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password
+        })
       })
+  
+      const data = await response.json()
 
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || "Sign in failed")
-      }
 
-      window.location.href = "/dashboard"
+      
+      if (response.ok) {
+              // Store tokens in localStorage
+      localStorage.setItem('accessToken', data.token)
+      localStorage.setItem('refreshToken', data.refreshToken) // If your API provides refresh token
+      localStorage.setItem('user', JSON.stringify(data.user))
+      document.cookie = `auth-token=${data.token}; path=/; secure; samesite=strict`
+
+         toast.success('login successful! Redirecting to home...')
+        setTimeout(() => {
+          router.push('/')
+        }, 2000)
+      } else {
+        toast.error(data.error || 'Login failed')
+       }
     } catch (error) {
-      console.error("Signin error:", error)
-      setError(error instanceof Error ? error.message : "Failed to sign in")
+      console.error('Error during Login:', error)
+      toast.error('Network error. Please try again.')
     } finally {
       setIsLoading(false)
     }
+    setError("")
+    
   }
+  
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-md max-w-md mx-auto">
-      <h2 className="text-3xl font-bold text-green-600 text-center mb-6">
-        Welcome Back
-      </h2>
-
-      {error && (
-        <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div>
-          <label className="block text-green-700 font-medium">Email</label>
-          <input
-            type="email"
-            {...register("email")}
-            placeholder="you@example.com"
-            className="mt-1 w-full p-3 border border-green-200 rounded-lg focus:border-green-500 focus:ring-green-500 outline-none"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+    <>
+    <Toaster />
+    <div className="bg-white p-8 rounded-lg shadow-md">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
+          <h2 className="text-3xl font-bold text-green-600 text-center mb-6">Welcome Back</h2>
+          
+          {error && (
+            <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">
+              {error}
+            </div>
           )}
-        </div>
 
-        <div>
-          <label className="block text-green-700 font-medium">Password</label>
-          <input
-            type="password"
-            {...register("password")}
-            placeholder="********"
-            className="mt-1 w-full p-3 border border-green-200 rounded-lg focus:border-green-500 focus:ring-green-500 outline-none"
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Email</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="you@example.com" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
           />
-          {errors.password && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
 
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-green-700">Password</FormLabel>
+                <FormControl>
+                  <Input 
+                    type="password" 
+                    placeholder="********" 
+                    {...field}
+                    className="border-green-200 focus:border-green-500 focus:ring-green-500"
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500" />
+              </FormItem>
+            )}
+          />
 
+          <div className="flex justify-end">
+            <Link 
+              href="/forgot-password" 
+              className="text-sm text-green-600 hover:text-green-700 hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
-          disabled={isLoading}
-        >
-          {isLoading ? "Signing in..." : "Sign In"}
-        </button>
-
-        <div className="text-center">
-          <Link
-            href="/signup"
-            className="text-sm text-green-600 hover:text-green-700 hover:underline"
+          <Button 
+            type="submit" 
+            className="w-full bg-green-600 hover:bg-green-700 text-white transition-colors" 
+            disabled={isLoading}
           >
-            Don't have an account? Sign up
-          </Link>
-        </div>
-      </form>
+            {isLoading ? "Signing in..." : "Sign In"}
+          </Button>
+
+          <div className="text-center">
+            <Link 
+              href="/signup" 
+              className="text-sm text-green-600 hover:text-green-700 hover:underline"
+            >
+              Don&apos;t have an account? Sign up
+            </Link>
+          </div>
+        </form>
+      </Form>
     </div>
+    </>
   )
 }

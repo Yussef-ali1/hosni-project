@@ -12,7 +12,7 @@ const offerings = [
   {
      id: 2,
      name: "Recycling & Composting",
-     icon: "♻️", // Recycle emoji
+     icon: "♻", // Recycle emoji
     description: "Home & business waste management solutions",
     bgColor: "bg-green-50",
     borderColor: "border-green-200"
@@ -74,7 +74,7 @@ export default function ExploreOfferings() {
         
         <div className="text-center mt-12">
           <Link
-             href="/all-offerings"
+             href="/training"
              className="inline-block bg-green-600 text-white py-3 px-8 rounded-md font-semibold hover:bg-green-700 transition-colors"
           >
             Discover More

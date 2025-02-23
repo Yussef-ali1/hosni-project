@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Leaf, Menu, X, ChevronDown } from "lucide-react"
+import Image from "next/image" // Add this import
+import { useRouter } from "next/navigation"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -9,9 +11,9 @@ const navItems = [
     name: "Products", 
     href: "/products",
     dropdown: [
-      { name: "Energy Efficient", href: "/products/energy-efficient" },
-      { name: "Eco-Friendly products", href: "/https://store.sustainabilitygate.com/" },
-      { name: "Sustainable Living", href: "/products/sustainable-living" }
+      { name: "Energy Efficient", href: "/products" },
+      { name: "Eco-Friendly Home", href: "/products" },
+      { name: "Sustainable Living", href: "/products" }
     ]
   },
   { name: "Services", href: "/services" },
@@ -24,11 +26,16 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [scrolled, setScrolled] = useState(false)
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const router = useRouter()
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
+
+    const token = localStorage.getItem('accessToken')
+    setIsLoggedIn(!!token)
     
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -38,6 +45,14 @@ export default function Header() {
     setActiveDropdown(activeDropdown === i ? null : i)
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
+    setIsLoggedIn(false)
+    router.push('/')
+  }
+
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       scrolled ? "bg-green-700 shadow-md" : "bg-green-600"
@@ -45,7 +60,16 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center group">
           <div className="relative">
-            <Leaf className="h-8 w-8 mr-2 text-white transition-transform duration-300 group-hover:scale-110" />
+            <Image
+              src="/SustainabilityGate.png"
+              alt="Sustainability Gate"
+
+              width={40}
+              height={50}
+              className="h-8 w-8 mr-2 transition-transform duration-300 group-hover:scale-110"
+              priority
+            />
+            {/* <Leaf className="h-8 w-8 mr-2 text-white transition-transform duration-300 group-hover:scale-110" /> */}
             <span className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
           </div>
           <span className="text-2xl font-bold text-white">
@@ -95,6 +119,15 @@ export default function Header() {
         
         {/* Desktop Sign In Button */}
         <div className="hidden md:flex items-center space-x-4">
+      {isLoggedIn ? (
+        <button
+          onClick={handleLogout}
+          className="bg-white text-green-600 px-5 py-2 rounded-md font-semibold hover:bg-red-50 transition-colors shadow-sm hover:shadow"
+        >
+          Sign Out
+        </button>
+      ) : (
+        <>
           <Link
             href="/signin"
             className="bg-white text-green-600 px-5 py-2 rounded-md font-semibold hover:bg-green-50 transition-colors shadow-sm hover:shadow"
@@ -107,8 +140,10 @@ export default function Header() {
           >
             Join Us
           </Link>
-        </div>
-        
+        </>
+      )}
+    </div>
+
         {/* Mobile Menu Button */}
         <button 
           className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-green-700 hover:bg-green-800 transition-colors"

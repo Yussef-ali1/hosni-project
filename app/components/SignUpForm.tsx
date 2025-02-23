@@ -8,10 +8,14 @@ import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import Link from "next/link"
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
+import { Toaster } from 'react-hot-toast'
+
 
 const formSchema = z
   .object({
-    name: z.string().min(3, "Name must be at least 3 characters"),
+    username: z.string().min(2, "Name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
     password: z.string()
       .min(8, "Password must be at least 8 characters"),
@@ -24,11 +28,12 @@ const formSchema = z
 
 export default function SignUpForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -38,28 +43,41 @@ export default function SignUpForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
     try {
-      const response = await fetch('/api/auth/signup', {
+      const response = await fetch('http://localhost:5000/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          username: values.username,
+          email: values.email,
+          password: values.password
+        })
       })
+  
+      const data = await response.json()
       
-      if (!response.ok) {
-        throw new Error('Signup failed')
-      }
-      
-      // Handle successful signup
-      window.location.href = '/dashboard'
+      if (response.ok) {
+         toast.success('Signup successful! Redirecting to login...')
+        setTimeout(() => {
+          router.push('/signin')
+        }, 2000)
+      } else {
+        toast.error(data.error || 'Signup failed')
+       }
     } catch (error) {
-      console.error('Signup error:', error)
+      console.error('Error during signup:', error)
+      toast.error('Network error. Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
-
+  
   return (
+    <>
+
+    <Toaster position="top-center" />
+
     <div className="bg-white p-8 rounded-lg shadow-md">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
@@ -67,10 +85,10 @@ export default function SignUpForm() {
           
           <FormField
             control={form.control}
-            name="name"
+            name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-green-700">Name</FormLabel>
+                <FormLabel className="text-green-700">Username</FormLabel>
                 <FormControl>
                   <Input 
                     placeholder="John Doe" 
@@ -158,5 +176,6 @@ export default function SignUpForm() {
         </form>
       </Form>
     </div>
+    </>
   )
 }
