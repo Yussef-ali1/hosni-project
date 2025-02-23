@@ -10,7 +10,7 @@ const navItems = [
     href: "/products",
     dropdown: [
       { name: "Energy Efficient", href: "/products/energy-efficient" },
-      { name: "Eco-Friendly Home", href: "/products/eco-home" },
+      { name: "Eco-Friendly products", href: "/https://store.sustainabilitygate.com/" },
       { name: "Sustainable Living", href: "/products/sustainable-living" }
     ]
   },
