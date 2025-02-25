@@ -7,27 +7,27 @@ export default function CTASection() {
         </h2>
         
         <p className="text-xl mb-6 leading-relaxed text-blue-700">
-          <span className="bg-green-100 px-2 py-1 rounded font-bold text-blue-800">ONLINE</span> and through our <span className="bg-green-100 px-2 py-1 rounded font-bold text-blue-800">MOBILE-GREEN-OUTLETS</span>, we make it <span className="bg-green-100 px-2 py-1 rounded font-bold text-blue-800">EASY</span> for <span className="bg-green-100 px-2 py-1 rounded font-bold text-blue-800">INDIVIDUALS, BUSINESSES, & COMMUNITIES</span> to integrate sustainability into <span className="bg-green-100 px-2 py-1 rounded font-bold text-blue-800">EVERYDAY PURCHASING DECISIONS:</span>
+          <strong className="text-blue-800">ONLINE</strong> and through our <strong className="text-blue-800">MOBILE-GREEN-OUTLETS</strong>, we make it <strong className="text-blue-800">EASY</strong> for <strong className="text-blue-800">INDIVIDUALS, BUSINESSES, & COMMUNITIES</strong> to integrate sustainability into <strong className="text-blue-800">EVERYDAY PURCHASING DECISIONS:</strong>
         </p>
         
-        <div className="grid md:grid-cols-2 gap-6 mt-10 text-left">
-          <div className="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-green-200">
-            <h3 className="text-xl font-bold mb-3 text-blue-700">Effortless Access to Eco-Friendly Options</h3>
+        <div className="mt-10 text-left space-y-6">
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-blue-700">Effortless Access to Eco-Friendly Options</h3>
             <p className="text-blue-600">Compare sustainability ratings and make informed decisions.</p>
           </div>
           
-          <div className="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-green-200">
-            <h3 className="text-xl font-bold mb-3 text-blue-700">Eco-Conscious Providers</h3>
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-blue-700">Eco-Conscious Providers</h3>
             <p className="text-blue-600">Connect with suppliers prioritizing Energy efficiency & carbon neutrality.</p>
           </div>
           
-          <div className="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-green-200">
-            <h3 className="text-xl font-bold mb-3 text-blue-700">Sustainability Assessments</h3>
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-blue-700">Sustainability Assessments</h3>
             <p className="text-blue-600">Evaluate products & Services for environmental impact.</p>
           </div>
           
-          <div className="bg-green-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-green-200">
-            <h3 className="text-xl font-bold mb-3 text-blue-700">Incentivized Green Choices</h3>
+          <div>
+            <h3 className="text-xl font-bold mb-2 text-blue-700">Incentivized Green Choices</h3>
             <p className="text-blue-600">Encouraging Responsible Consumption.</p>
           </div>
         </div>

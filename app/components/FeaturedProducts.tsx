@@ -52,18 +52,8 @@ export default function WhyChooseSustainabilityGate() {
   ];
 
   return (
-    <section className="relative py-16 bg-gray-50 overflow-hidden">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        className="absolute top-0 left-0 w-full h-full object-cover opacity-20"
-      >
-        <source src="/sg-vid2" type="video/mp4" />
-      </video>
-
-      <div className="relative container mx-auto px-4">
+    <section className="py-16 bg-gray-50 overflow-hidden">
+      <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">
           <span className="text-green-600">🌱</span> Why Choose Sustainability Gate?
         </h2>
@@ -72,26 +62,25 @@ export default function WhyChooseSustainabilityGate() {
           Join thousands of environmentally conscious individuals making a difference every day.
         </p>
         
-        {/* Featured Video - Full Width */}
-        <div className="w-full mb-12 relative overflow-hidden" style={{ height: "400px" }}>
+        {/* Featured Video - Now as a main visible element */}
+        <div className="w-full mb-12 rounded-lg overflow-hidden shadow-xl" style={{ height: "500px" }}>
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="w-full h-full object-cover"
           >
-            <source src="/sg-vid2" type="video/mp4" />
+            <source src="/videos/sg-vid2.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {benefits.map((benefit) => (
             <div 
               key={benefit.id}
-              className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow flex flex-col h-full backdrop-blur-lg bg-opacity-80"
+              className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow flex flex-col h-full"
             >
               <Image
                 src={benefit.image}
