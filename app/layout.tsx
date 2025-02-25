@@ -19,7 +19,11 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+        <head>
+                <link rel="shortcut icon" href="/SustainabilityGate.png" />
+              </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
+      
         <Providers>
           <Header />
           <main className="flex-grow">

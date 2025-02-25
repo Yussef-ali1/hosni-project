@@ -13,9 +13,10 @@ export default function Home() {
   return (
     <div className="bg-green-50">
       <Hero />
+      <CTASection />
       <FeaturedProducts />
       <Services />
-      <CTASection />
+
       <FeatureSection title={""} description={""} />
     </div>
   )
