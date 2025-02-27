@@ -31,16 +31,16 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p className="text-sm">Email: info@sustainabilitygate.com</p>
-            <p className="text-sm">Phone: +1 (555) 123-4567</p>
+            <p className="text-sm">Email: m.fadly@sustainabilitygate.com</p>
+            <p className="text-sm">Phone: +971 (50) 247-3421</p>
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               {[
                 { icon: <Facebook className="w-5 h-5" />, name: "Facebook", href: "https://www.facebook.com/profile.php?id=61572956647191" },
-                { icon: <Twitter className="w-5 h-5" />, name: "Twitter", href: "#" },
-                { icon: <Instagram className="w-5 h-5" />, name: "Instagram", href: "#" },
+                // { icon: <Twitter className="w-5 h-5" />, name: "Twitter", href: "#" },
+                // { icon: <Instagram className="w-5 h-5" />, name: "Instagram", href: "#" },
                 { icon: <Linkedin className="w-5 h-5" />, name: "LinkedIn", href: "https://www.linkedin.com/posts/sustainability-gate_sustainability-gate-linkedin-activity-7295383585652457472-AUot?utm_source=share&utm_medium=member_desktop" }
               ].map((social) => (
                 <a 
@@ -56,7 +56,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-4 border-t border-green-700 text-center text-sm">
-          © 2023 Sustainability Gate. All rights reserved.
+          © 2025 Sustainability Gate. All rights reserved.
         </div>
       </div>
     </footer>
