@@ -2,8 +2,18 @@ export default function CTASection() {
   return (
     <section className="py-12 sm:py-20 bg-gradient-to-b from-white to-blue-50">
       <div className="container mx-auto px-4 max-w-5xl">
+        {/* Logo added above the content */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src="/logo.png" 
+            alt="Company Logo" 
+            className="h-16 sm:h-20 w-auto"
+          />
+        </div>
+        
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-8 leading-tight">
+          {/* Modified h2 to display better on one line */}
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-blue-600 mb-8 leading-tight">
             Your One-Stop Destination for Sustainable Choices!
           </h2>
           
@@ -13,27 +23,48 @@ export default function CTASection() {
         </div>
 
         <div className="space-y-8 md:space-y-12">
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-blue-700">Transforming Everyday Choices</h3>
-            <p className="text-lg text-blue-600 leading-relaxed">
-              We simplify sustainable living by providing comprehensive sustainability ratings, connecting you with eco-conscious providers, and offering detailed environmental impact assessments. Our platform makes it natural to choose green alternatives in your daily purchasing decisions.
-            </p>
-          </div>
+  <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="flex items-center mb-4">
+      <img 
+        src="/SustainabilityGate.png" 
+        alt="Logo Bullet" 
+        className="h-8 w-auto mr-3 flex-shrink-0"
+      />
+      <h3 className="text-2xl font-bold text-blue-700">Transforming Everyday Choices</h3>
+    </div>
+    <p className="text-lg text-blue-600 leading-relaxed">
+      We simplify sustainable living by providing comprehensive sustainability ratings, connecting you with eco-conscious providers, and offering detailed environmental impact assessments. Our platform makes it natural to choose green alternatives in your daily purchasing decisions.
+    </p>
+  </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-blue-700">Creating Lasting Impact</h3>
-            <p className="text-lg text-blue-600 leading-relaxed">
-              By incentivizing green choices and fostering connections between conscious consumers and sustainable providers, we're building a community dedicated to environmental stewardship. Every decision counts, and we make each one count towards a better future.
-            </p>
-          </div>
+  <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="flex items-center mb-4">
+      <img 
+        src="/SustainabilityGate.png" 
+        alt="Logo Bullet" 
+        className="h-8 w-auto mr-3 flex-shrink-0"
+      />
+      <h3 className="text-2xl font-bold text-blue-700">Creating Lasting Impact</h3>
+    </div>
+    <p className="text-lg text-blue-600 leading-relaxed">
+      By incentivizing green choices and fostering connections between conscious consumers and sustainable providers, we're building a community dedicated to environmental stewardship. Every decision counts, and we make each one count towards a better future.
+    </p>
+  </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-            <h3 className="text-2xl font-bold mb-4 text-blue-700">Join the Green Revolution</h3>
-            <p className="text-lg text-blue-600 leading-relaxed">
-              Whether you're an individual looking to reduce your carbon footprint, a business aiming for sustainability, or a community driving collective change, our platform provides the tools and connections you need to make a real difference.
-            </p>
-          </div>
-        </div>
+  <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="flex items-center mb-4">
+      <img 
+        src="/SustainabilityGate.png" 
+        alt="Logo Bullet" 
+        className="h-8 w-auto mr-3 flex-shrink-0"
+      />
+      <h3 className="text-2xl font-bold text-blue-700">Join the Green Revolution</h3>
+    </div>
+    <p className="text-lg text-blue-600 leading-relaxed">
+      Whether you're an individual looking to reduce your carbon footprint, a business aiming for sustainability, or a community driving collective change, our platform provides the tools and connections you need to make a real difference.
+    </p>
+  </div>
+</div>
       </div>
     </section>
   )

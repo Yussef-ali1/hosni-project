@@ -1,24 +1,26 @@
 "use client"
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, ChevronDown, Home, ShoppingBag, Book, Calculator, Users, LogIn, UserPlus } from "lucide-react"
+import { Menu, X, ChevronDown, Home, ShoppingBag, Book, Calculator, Users, LogIn, UserPlus, Wrench } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 const navItems = [
   { name: "Home", href: "/", icon: Home },
+  { name: "Our Story", href: "/about", icon: Users },
+
   { 
     name: "Products", 
     href: "#",
     icon: ShoppingBag,
     dropdown: [
-      { name: "Eco-Friendly Products", href: "https://store.sustainabilitygate.com/", external: true },
-      { name: "Coming Soon", href: "/coming-soon" }
+      { name: "Online Green Shopping", href: "https://store.sustainabilitygate.com/", external: true },
+      { name: "SG Mobile Green Outlets", href: "/coming-soon" }
     ]
   },
+  { name: "Service", href: "/services", icon: Wrench }, 
   { name: "Training", href: "/training", icon: Book }, 
   { name: "Calculator", href: "/calculator", icon: Calculator },
-  { name: "Our Story", href: "/about", icon: Users },
 ]
 
 export default function Header() {

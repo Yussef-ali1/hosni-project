@@ -44,7 +44,7 @@ export default function WhyChooseSustainabilityGate() {
       id: 5,
       image: "/pic5.jpg",
       icon: <Globe className="h-12 w-12 text-green-600 mb-4" />,
-      title: "Global Sustainability Impact",
+      title: "Eco-Conscious Providers",
       description: "Explore initiatives that promote sustainability worldwide and make an impact.",
       linkUrl: "/global-impact",
       linkText: "Learn More"
@@ -54,9 +54,12 @@ export default function WhyChooseSustainabilityGate() {
   return (
     <section className="py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">
-          <span className="text-green-600">🌱</span> Why Choose Sustainability Gate?
-        </h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800">
+  <span className="text-green-600 inline-flex items-center">
+    <img src="/SustainabilityGate.png" alt="Sustainability Gate Leaf" className="h-8 w-8 mr-2" />
+  </span> 
+  Why Choose Sustainability Gate?
+</h2>
                 
         <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
           Join thousands of environmentally conscious individuals making a difference every day.
@@ -69,7 +72,7 @@ export default function WhyChooseSustainabilityGate() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[50%_30%]"
           >
             <source src="/videos/sg-vid2.mp4" type="video/mp4" />
             Your browser does not support the video tag.

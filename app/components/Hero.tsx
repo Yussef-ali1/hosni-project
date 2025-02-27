@@ -39,22 +39,29 @@ export default function Hero() {
         <p className="text-xl md:text-2xl mb-8">Smart Solutions | Green Living | Energy Savings</p>
         <div className="flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0">
           <Link
-            href="/shop"
+            href= "https://store.sustainabilitygate.com/"
             className="bg-white text-green-600 px-6 py-3 rounded-md font-semibold hover:bg-green-100 transition-colors"
           >
             Shop Eco Products
           </Link>
           <Link
-            href="/calculator"
-            className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-green-600 transition-colors"
-          >
-            Calculate Your Carbon Footprint
-          </Link>
-          <Link
-            href="/green-community"
+            href="/coming-soon"
             className="bg-green-700 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-800 transition-colors"
           >
-            Join Our Green Community
+            SG Mobile Green Outlets
+          </Link>
+
+          <Link
+            href="/services"
+            className="bg-transparent border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-green-600 transition-colors"
+          >
+            Business Sustainable Solutions
+          </Link>
+          <Link
+            href="/calculator"
+            className="bg-green-800 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-900 transition-colors"
+          >
+            Calculate Your Carbon Footprint
           </Link>
         </div>
       </div>
