@@ -1,4 +1,4 @@
-import { Wrench, Truck, Recycle, GraduationCap, Users, Leaf, Building2 } from "lucide-react"
+import { Wrench, Truck, Recycle, GraduationCap, Leaf, Building2, ShoppingBag, Users } from "lucide-react"
 import Link from "next/link"
 
 interface Service {
@@ -13,7 +13,7 @@ const services: Service[] = [
   {
     id: 1,
     name: "Green Fixing & Maintenance",
-    icon: "🔧", // Wrench icon
+    icon: Wrench,
     description: "Expert maintenance for your sustainable products",
     category: "industrial"
   },
@@ -34,7 +34,7 @@ const services: Service[] = [
   {
     id: 4,
     name: "Certified Training",
-    icon: "🎓", // GraduationCap icon
+    icon: GraduationCap,
     description: "Learn about sustainability and energy-saving",
     category: "residential"
   },
